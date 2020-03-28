@@ -27,7 +27,10 @@ extension String {
 
 extension NSAttributedString {
     internal convenience init?(html: String) {
-        guard let data = html.data(using: String.Encoding.utf16, allowLossyConversion: false) else {
+        
+        let htmlCropped = html.replacingOccurrences(of: "&lt;/p&gt;&lt;p&gt;&amp;nbsp;&lt;/p&gt;", with: "")
+        
+        guard let data = htmlCropped.data(using: String.Encoding.utf16, allowLossyConversion: false) else {
             // not sure which is more reliable: String.Encoding.utf16 or String.Encoding.unicode
             return nil
         }
@@ -36,4 +39,10 @@ extension NSAttributedString {
         }
         self.init(attributedString: attributedString)
     }
+}
+
+extension Notification.Name {
+    static let didReceiveData = Notification.Name("didReceiveData")
+    static let didCompleteTask = Notification.Name("didCompleteTask")
+    static let completedLengthyDownload = Notification.Name("completedLengthyDownload")
 }
