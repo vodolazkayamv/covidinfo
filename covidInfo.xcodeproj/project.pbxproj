@@ -13,6 +13,10 @@
 		AE1F00C8242E08BA0040627F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE1F00C6242E08BA0040627F /* Main.storyboard */; };
 		AE1F00CA242E08BF0040627F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE1F00C9242E08BF0040627F /* Assets.xcassets */; };
 		AE1F00CD242E08BF0040627F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE1F00CB242E08BF0040627F /* LaunchScreen.storyboard */; };
+		AE1F00D5242E09FA0040627F /* XMLParserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1F00D4242E09FA0040627F /* XMLParserManager.swift */; };
+		AE1F00D9242E25000040627F /* ScrollableStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1F00D8242E25000040627F /* ScrollableStackView.swift */; };
+		AE1F00FD242E3DB50040627F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1F00FC242E3DB50040627F /* Extensions.swift */; };
+		AE1F0104242F5BFD0040627F /* PaddingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1F0103242F5BFD0040627F /* PaddingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +28,10 @@
 		AE1F00C9242E08BF0040627F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AE1F00CC242E08BF0040627F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AE1F00CE242E08BF0040627F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AE1F00D4242E09FA0040627F /* XMLParserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLParserManager.swift; sourceTree = "<group>"; };
+		AE1F00D8242E25000040627F /* ScrollableStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollableStackView.swift; sourceTree = "<group>"; };
+		AE1F00FC242E3DB50040627F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		AE1F0103242F5BFD0040627F /* PaddingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,7 +67,11 @@
 				AE1F00C0242E08BA0040627F /* AppDelegate.swift */,
 				AE1F00C2242E08BA0040627F /* SceneDelegate.swift */,
 				AE1F00C4242E08BA0040627F /* ViewController.swift */,
+				AE1F00D4242E09FA0040627F /* XMLParserManager.swift */,
+				AE1F00FC242E3DB50040627F /* Extensions.swift */,
 				AE1F00C6242E08BA0040627F /* Main.storyboard */,
+				AE1F00D8242E25000040627F /* ScrollableStackView.swift */,
+				AE1F0103242F5BFD0040627F /* PaddingView.swift */,
 				AE1F00C9242E08BF0040627F /* Assets.xcassets */,
 				AE1F00CB242E08BF0040627F /* LaunchScreen.storyboard */,
 				AE1F00CE242E08BF0040627F /* Info.plist */,
@@ -139,7 +151,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE1F00C5242E08BA0040627F /* ViewController.swift in Sources */,
+				AE1F00FD242E3DB50040627F /* Extensions.swift in Sources */,
 				AE1F00C1242E08BA0040627F /* AppDelegate.swift in Sources */,
+				AE1F00D9242E25000040627F /* ScrollableStackView.swift in Sources */,
+				AE1F00D5242E09FA0040627F /* XMLParserManager.swift in Sources */,
+				AE1F0104242F5BFD0040627F /* PaddingView.swift in Sources */,
 				AE1F00C3242E08BA0040627F /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -287,6 +303,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = UKBNTL7HA9;
 				INFOPLIST_FILE = covidInfo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -305,6 +322,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = UKBNTL7HA9;
 				INFOPLIST_FILE = covidInfo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
