@@ -16,15 +16,15 @@ class ViewController: UIViewController, XMLParserDelegate, UIScrollViewDelegate 
         "link"  : "https://www.who.int/rss-feeds/covid19-news-english.xml"
         ],
         [
-        "title" : "CDC: Coronavirus Disease 2019 (COVID-19) Situation Update" ,
+        "title" : "CDC: Coronavirus Disease 2019 (COVID-19) Situation Update 1" ,
         "link"  : "https://tools.cdc.gov/api/v2/resources/media/404952.rss"
         ],
         [
-        "title" : "CDC: Coronavirus Disease 2019 (COVID-19) Situation Update" ,
+        "title" : "CDC: Coronavirus Disease 2019 (COVID-19) Situation Update 2" ,
         "link"  : "https://tools.cdc.gov/api/v2/resources/media/404952.rss"
         ],
         [
-        "title" : "CDC: Coronavirus Disease 2019 (COVID-19) Situation Update" ,
+        "title" : "CDC: Coronavirus Disease 2019 (COVID-19) Situation Update 3" ,
         "link"  : "https://tools.cdc.gov/api/v2/resources/media/404952.rss"
         ]
     ]
@@ -52,11 +52,12 @@ class ViewController: UIViewController, XMLParserDelegate, UIScrollViewDelegate 
         for source in sources {
             let feed : [RSS_Item] = loadData(urlString: source["link"] ?? "")
             let board : BoardView = BoardView()
+            board.title = source["title"] ?? ""
             for item in feed {
                 let newsCard: CardView = CardView(withRSS: item)
                 board.add(card: newsCard)
             }
-            panelViewContoller.panelView.add(board: board)
+            panelViewContoller.add(board: board)
         }
     }
     

@@ -71,11 +71,11 @@ class PanelView: UIView {
         
         // TODO: make boards resize for album orientation
         frame.size.width = UIScreen.main.bounds.width - spacing*2
-        frame.size.height = UIScreen.main.bounds.height - 40
+        frame.size.height = UIScreen.main.bounds.height
         board.frame = frame
         
         scrollView.addSubview(board)
-            boards.append(board)
+        boards.append(board)
 
         var size : CGSize = scrollView.contentSize
         size.width += board.frame.size.width + spacing * 2

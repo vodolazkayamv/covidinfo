@@ -10,9 +10,9 @@ import Foundation
 import UIKit
 
 class BoardView: UIView {
+    var title: String = ""
     var cards : [CardView] = []
-    
-    var cardsScrollableStackView : ScrollableStackView!
+    private var cardsScrollableStackView : ScrollableStackView!
     
     init() {
         let frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 100)

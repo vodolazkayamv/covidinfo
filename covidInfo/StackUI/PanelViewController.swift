@@ -11,6 +11,9 @@ import UIKit
 
 class PanelViewController: UIViewController, UIScrollViewDelegate {
     
+    let titleContainerView : UIView = UIView()
+    let titleLabel: UILabel = UILabel()
+    
     let structureView : UIStackView = UIStackView()
     let panelView : PanelView = PanelView()
     var pageController : UIPageControl = UIPageControl()
@@ -20,9 +23,17 @@ class PanelViewController: UIViewController, UIScrollViewDelegate {
         
         superview.addSubview(self.view)
         self.view.addSubview(structureView)
+        
+        self.structureView.axis = .vertical
+        self.structureView.spacing = 0
+        
+        self.structureView.addArrangedSubview(titleContainerView)
+        self.structureView.addArrangedSubview(pageController)
         self.structureView.addArrangedSubview(panelView)
         
+        titleLabel.text = "123"
         setupConstraints(superview)
+        configurePageControl()
     }
     
     required init?(coder: NSCoder) {
@@ -51,6 +62,27 @@ class PanelViewController: UIViewController, UIScrollViewDelegate {
             structureView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 0),
             structureView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
         ])
+        
+        pageController.translatesAutoresizingMaskIntoConstraints = false;
+        NSLayoutConstraint.activate([
+            pageController.widthAnchor.constraint(equalTo:structureView.widthAnchor),
+            pageController.heightAnchor.constraint(equalToConstant: 20)
+        ])
+        
+        titleContainerView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            titleContainerView.widthAnchor.constraint(equalTo:structureView.widthAnchor),
+        ])
+        titleContainerView.addSubview(titleLabel)
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false;
+        titleLabel.numberOfLines = 0
+        titleLabel.font = UIFont.systemFont(ofSize: 24, weight: .black)
+        NSLayoutConstraint.activate([
+            titleLabel.leadingAnchor.constraint(equalTo:titleContainerView.leadingAnchor, constant: 20),
+            titleLabel.trailingAnchor.constraint(equalTo:titleContainerView.trailingAnchor, constant: -20),
+            titleContainerView.heightAnchor.constraint(equalTo:titleLabel.heightAnchor),
+
+        ])
     }
     // MARK: - page control
     func configurePageControl() {
@@ -64,5 +96,12 @@ class PanelViewController: UIViewController, UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let pageNumber : Int = Int(round(scrollView.contentOffset.x / scrollView.frame.size.width))
         pageController.currentPage = pageNumber
+        titleLabel.text = panelView.boards[pageNumber].title
+    }
+    
+    // MARK: -
+     public func add(board: BoardView) {
+        self.panelView.add(board: board)
+        configurePageControl()
     }
 }

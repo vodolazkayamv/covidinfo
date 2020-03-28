@@ -109,7 +109,7 @@
 				AE1F010F242F74190040627F /* XIBs */,
 				AE1F0110242F74290040627F /* ViewControllers */,
 				AE1F00FC242E3DB50040627F /* Extensions.swift */,
-				AE1F010B242F72FF0040627F /* RSSParser */,
+				AE1F010B242F72FF0040627F /* Network */,
 				AE1F0107242F63A20040627F /* StackUI */,
 			);
 			path = covidInfo;
@@ -136,13 +136,13 @@
 			path = UtilityViews;
 			sourceTree = "<group>";
 		};
-		AE1F010B242F72FF0040627F /* RSSParser */ = {
+		AE1F010B242F72FF0040627F /* Network */ = {
 			isa = PBXGroup;
 			children = (
 				AE1F00D4242E09FA0040627F /* XMLParserManager.swift */,
 				AE5B864B242F921F00210A2C /* APIWorker.swift */,
 			);
-			path = RSSParser;
+			path = Network;
 			sourceTree = "<group>";
 		};
 		AE1F010E242F74100040627F /* Main */ = {

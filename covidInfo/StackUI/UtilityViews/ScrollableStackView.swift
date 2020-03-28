@@ -42,12 +42,12 @@ class ScrollableStackView: UIScrollView {
         
         self.addSubview(stackView)
         self.stackView.translatesAutoresizingMaskIntoConstraints = false;
+        let trailingOffset = -(UIScreen.main.bounds.height / 3 );
         NSLayoutConstraint.activate([
             self.stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             self.stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            self.stackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 20),
-            self.stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20),
-            
+            self.stackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0),
+            self.stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: trailingOffset),
             self.stackView.widthAnchor.constraint(equalTo: superview.widthAnchor),
         ])
     }
