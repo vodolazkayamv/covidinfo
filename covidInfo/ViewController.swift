@@ -19,6 +19,13 @@ class ViewController: UIViewController, XMLParserDelegate, UIScrollViewDelegate 
     var feedImgs: [AnyObject] = []
     var url: URL!
     
+    let pages = 3;
+    
+    let resources : [String] = ["https://www.who.int/feeds/entity/mediacentre/news/ru/rss.xml",
+    "https://www.who.int/feeds/entity/csr/don/en/rss.xml",
+    "https://www.ecdc.europa.eu/en/taxonomy/term/1310/feed"]
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -32,7 +39,7 @@ class ViewController: UIViewController, XMLParserDelegate, UIScrollViewDelegate 
         pagingScrollView.isPagingEnabled = true
         self.view.addSubview(pagingScrollView)
         
-        let pages = 3;
+        
         for index in 0..<pages {
             let scrollableStack = ScrollableStackView();
             
@@ -64,43 +71,12 @@ class ViewController: UIViewController, XMLParserDelegate, UIScrollViewDelegate 
     
     override func viewWillAppear(_ animated: Bool) {
         for i in 0..<3 {
-            var newsRSS_url: String = "";
-            switch i {
-            case 0:
-                newsRSS_url = "https://www.who.int/feeds/entity/mediacentre/news/ru/rss.xml";
-                break;
-            case 1:
-                newsRSS_url = "https://www.who.int/feeds/entity/csr/don/en/rss.xml";
-                break;
-            case 2:
-                newsRSS_url = "https://www.ecdc.europa.eu/en/taxonomy/term/1310/feed";
-                break;
-            default:
-                newsRSS_url = "";
-            }
-            
-            loadData(urlString: newsRSS_url)
+            let newsURL: String = self.resources[i];
+            loadData(urlString: newsURL)
             
             for item in myFeed {
-                let customView : PaddingView = PaddingView();
-                let containerView : PaddingView = PaddingView()
-                containerView.setSubView(subview: customView)
-
-                customView.backgroundColor = .white
-                customView.layer.cornerRadius = 10;
-                
-                customView.layer.shadowColor = UIColor.black.cgColor
-                customView.layer.shadowOffset = CGSize(width: 0, height: 1.0)
-                customView.layer.shadowOpacity = 0.2
-                customView.layer.shadowRadius = 5.0
-                
-                let subStackView = CardStackView()
-                subStackView.fillWithRSSItem(item: item)
-                
-                customView.padding = 15;
-                customView.setSubView(subview: subStackView)
-
-                self.newsStacks[i].addArrangedView(view: containerView)
+                let newsCard: NewsCardView = NewsCardView(item: item)
+                self.newsStacks[i].addArrangedView(view: newsCard)
             }
         }
         
@@ -137,7 +113,7 @@ class ViewController: UIViewController, XMLParserDelegate, UIScrollViewDelegate 
     
     
     func configurePageControl() {
-        self.pageController.numberOfPages = 3
+        self.pageController.numberOfPages = self.pages
         self.pageController.currentPage = 0
         self.pageController.tintColor = UIColor.red
         self.pageController.pageIndicatorTintColor = UIColor.black

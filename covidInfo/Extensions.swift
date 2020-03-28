@@ -8,25 +8,8 @@
 
 import Foundation
 import UIKit
-extension UITextView {
-    func adjustUITextViewHeight()
-    {
-        self.translatesAutoresizingMaskIntoConstraints = true        
-        self.isScrollEnabled = false
-    }
-    
-    func setHTMLFromString(htmlText: String) {
-        let modifiedFont = String(format:"<span style=\"font-family: '-apple-system', 'HelveticaNeue'; font-size: \(self.font!.pointSize)\">%@</span>", htmlText)
 
-        let attrStr = try! NSAttributedString(
-            data: modifiedFont.data(using: .unicode, allowLossyConversion: true)!,
-            options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding:String.Encoding.utf8.rawValue],
-            documentAttributes: nil)
-
-        self.attributedText = attrStr
-    }
-}
-
+/*
 extension String {
     var htmlToAttributedString: NSAttributedString? {
         guard let data = data(using: .utf8) else { return NSAttributedString() }
@@ -40,35 +23,7 @@ extension String {
         return htmlToAttributedString?.string ?? ""
     }
 }
-
-extension UIView {
-
-  // OUTPUT 1
-  func dropShadow(scale: Bool = true) {
-    self.layer.masksToBounds = false
-    self.layer.shadowColor = UIColor.black.cgColor
-    self.layer.shadowOpacity = 0.5
-    self.layer.shadowOffset = CGSize(width: -1, height: 1)
-    self.layer.shadowRadius = 1
-
-    self.layer.shadowPath = UIBezierPath(rect: bounds).cgPath
-    self.layer.shouldRasterize = true
-    self.layer.rasterizationScale = scale ? UIScreen.main.scale : 1
-  }
-
-  // OUTPUT 2
-  func dropShadow(color: UIColor, opacity: Float = 0.5, offSet: CGSize, radius: CGFloat = 1, scale: Bool = true) {
-    layer.masksToBounds = false
-    layer.shadowColor = color.cgColor
-    layer.shadowOpacity = opacity
-    layer.shadowOffset = offSet
-    layer.shadowRadius = radius
-
-    layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
-    layer.shouldRasterize = true
-    layer.rasterizationScale = scale ? UIScreen.main.scale : 1
-  }
-}
+*/
 
 extension NSAttributedString {
     internal convenience init?(html: String) {
