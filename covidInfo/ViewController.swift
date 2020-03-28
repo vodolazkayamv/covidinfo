@@ -51,27 +51,8 @@ class ViewController: UIViewController, XMLParserDelegate {
             customView.layer.shadowRadius = 5.0
             
             
-            let titleLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: 20, height: Int.max))
-            titleLabel.numberOfLines = 0
-            titleLabel.text = item.title
-            titleLabel.font = UIFont.systemFont(ofSize: 18, weight: .black)
-            titleLabel.translatesAutoresizingMaskIntoConstraints = false
-            titleLabel.sizeToFit()
-            
-            let descriptionLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: 20, height: Int.max))
-            descriptionLabel.numberOfLines = 0
-            descriptionLabel.attributedText = NSAttributedString(html: item.itemDescription)
-            descriptionLabel.font = UIFont.systemFont(ofSize: 16, weight: .light)
-            descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-            descriptionLabel.sizeToFit()
-            
-            let subStackView: UIStackView = UIStackView(arrangedSubviews: [titleLabel, descriptionLabel])
-            subStackView.translatesAutoresizingMaskIntoConstraints = false
-            subStackView.axis = .vertical
-            subStackView.spacing = 5
-            
-            titleLabel.widthAnchor.constraint(equalTo:subStackView.widthAnchor).isActive = true
-            descriptionLabel.widthAnchor.constraint(equalTo:subStackView.widthAnchor).isActive = true
+            let subStackView = CardStackView()
+            subStackView.fillWithRSSItem(item: item)
             
             customView.padding = 15;
             customView.setSubView(subview: subStackView)

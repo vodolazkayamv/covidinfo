@@ -17,6 +17,7 @@
 		AE1F00D9242E25000040627F /* ScrollableStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1F00D8242E25000040627F /* ScrollableStackView.swift */; };
 		AE1F00FD242E3DB50040627F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1F00FC242E3DB50040627F /* Extensions.swift */; };
 		AE1F0104242F5BFD0040627F /* PaddingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1F0103242F5BFD0040627F /* PaddingView.swift */; };
+		AE1F0106242F5FC80040627F /* CardStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1F0105242F5FC80040627F /* CardStackView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		AE1F00D8242E25000040627F /* ScrollableStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollableStackView.swift; sourceTree = "<group>"; };
 		AE1F00FC242E3DB50040627F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		AE1F0103242F5BFD0040627F /* PaddingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingView.swift; sourceTree = "<group>"; };
+		AE1F0105242F5FC80040627F /* CardStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStackView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,13 +72,22 @@
 				AE1F00D4242E09FA0040627F /* XMLParserManager.swift */,
 				AE1F00FC242E3DB50040627F /* Extensions.swift */,
 				AE1F00C6242E08BA0040627F /* Main.storyboard */,
-				AE1F00D8242E25000040627F /* ScrollableStackView.swift */,
-				AE1F0103242F5BFD0040627F /* PaddingView.swift */,
+				AE1F0107242F63A20040627F /* Stack UI */,
 				AE1F00C9242E08BF0040627F /* Assets.xcassets */,
 				AE1F00CB242E08BF0040627F /* LaunchScreen.storyboard */,
 				AE1F00CE242E08BF0040627F /* Info.plist */,
 			);
 			path = covidInfo;
+			sourceTree = "<group>";
+		};
+		AE1F0107242F63A20040627F /* Stack UI */ = {
+			isa = PBXGroup;
+			children = (
+				AE1F00D8242E25000040627F /* ScrollableStackView.swift */,
+				AE1F0103242F5BFD0040627F /* PaddingView.swift */,
+				AE1F0105242F5FC80040627F /* CardStackView.swift */,
+			);
+			path = "Stack UI";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,6 +162,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE1F00C5242E08BA0040627F /* ViewController.swift in Sources */,
+				AE1F0106242F5FC80040627F /* CardStackView.swift in Sources */,
 				AE1F00FD242E3DB50040627F /* Extensions.swift in Sources */,
 				AE1F00C1242E08BA0040627F /* AppDelegate.swift in Sources */,
 				AE1F00D9242E25000040627F /* ScrollableStackView.swift in Sources */,
