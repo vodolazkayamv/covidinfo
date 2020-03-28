@@ -1,5 +1,5 @@
 //
-//  CardStackView.swift
+//  CardContentRSSItem.swift
 //  covidInfo
 //
 //  Created by Мария Водолазкая on 28.03.2020.
@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class CardStackView_RSS: CardStackView_General {
+class CardContentRSSItem: CardContentView {
     
     var titleLabel : UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: Int.max))
     var descriptionLabel : UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: Int.max))
@@ -29,8 +29,8 @@ class CardStackView_RSS: CardStackView_General {
         
         
         setupTitleWith(item: item)
-        setupDescriptionWith(item: item)
         setupPubDateWith(item: item)
+        setupDescriptionWith(item: item)
         setupCategoryWith(item: item)
         
         showShortCard()

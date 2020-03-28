@@ -1,5 +1,5 @@
 //
-//  CardStackView_General.swift
+//  CardContentView.swift
 //  covidInfo
 //
 //  Created by Мария Водолазкая on 28.03.2020.
@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class CardStackView_General: UIStackView {
+class CardContentView: UIStackView {
     
     init() {
         let frame = CGRect(x: 0, y: 0, width: 100, height: 100)

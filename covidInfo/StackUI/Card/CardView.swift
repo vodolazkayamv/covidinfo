@@ -9,15 +9,12 @@
 import Foundation
 import UIKit
 
-class NewsCardView: UIView {
+class CardView: UIView {
     
-    init(item: RSS_Item) {
-        let frame = CGRect(x: 0, y: 0, width: 100, height: 100)
-        super.init(frame: frame)
-        
-        let containerView : PaddingView = PaddingView();
-
-        let cardView : PaddingView = PaddingView();
+    private let containerView : PaddingView = PaddingView();
+    private let cardView : PaddingView = PaddingView();
+    
+    private func setupView() {
         containerView.setSubView(subview: cardView)
 
         cardView.backgroundColor = .white
@@ -27,19 +24,41 @@ class NewsCardView: UIView {
         cardView.layer.shadowOffset = CGSize(width: 0, height: 0.5)
         cardView.layer.shadowOpacity = 0.2
         cardView.layer.shadowRadius = 3.0
-        
-        let subStackView = CardStackView_RSS()
-        subStackView.fillWithRSSItem(item: item)
-        
         cardView.padding = 15;
-        cardView.setSubView(subview: subStackView)
-        
+
         self.addSubview(containerView)
         self.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             self.widthAnchor.constraint(equalTo: containerView.widthAnchor),
             self.heightAnchor.constraint(equalTo: containerView.heightAnchor)
         ])
+    }
+    
+    init() {
+        let frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        super.init(frame: frame)
+        setupView()
+    }
+    
+    init(with content: CardContentView) {
+        let frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        super.init(frame: frame)
+        setupView()
+        
+        cardView.setSubView(subview: content)
+        
+    }
+    
+    init(withRSS item: RSS_Item) {
+        let frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        super.init(frame: frame)
+        
+        setupView()
+        
+        let subStackView = CardContentRSSItem()
+        subStackView.fillWithRSSItem(item: item)
+        cardView.setSubView(subview: subStackView)
+        
     }
     
     required init?(coder: NSCoder) {

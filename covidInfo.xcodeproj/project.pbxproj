@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9C15DAED242FDFFC00E0E646 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C15DAEC242FDFFC00E0E646 /* BoardView.swift */; };
+		9C34AD28242FE63E001457D2 /* PanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C34AD27242FE63E001457D2 /* PanelView.swift */; };
+		9C34AD2A242FE8D7001457D2 /* PanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C34AD29242FE8D7001457D2 /* PanelViewController.swift */; };
 		AE1F00C1242E08BA0040627F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1F00C0242E08BA0040627F /* AppDelegate.swift */; };
 		AE1F00C3242E08BA0040627F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1F00C2242E08BA0040627F /* SceneDelegate.swift */; };
 		AE1F00C5242E08BA0040627F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1F00C4242E08BA0040627F /* ViewController.swift */; };
@@ -17,14 +20,16 @@
 		AE1F00D9242E25000040627F /* ScrollableStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1F00D8242E25000040627F /* ScrollableStackView.swift */; };
 		AE1F00FD242E3DB50040627F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1F00FC242E3DB50040627F /* Extensions.swift */; };
 		AE1F0104242F5BFD0040627F /* PaddingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1F0103242F5BFD0040627F /* PaddingView.swift */; };
-		AE1F0106242F5FC80040627F /* CardStackView_RSS.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1F0105242F5FC80040627F /* CardStackView_RSS.swift */; };
-		AE1F010A242F70960040627F /* NewsCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1F0109242F70960040627F /* NewsCardView.swift */; };
-		AE1F010D242F73C60040627F /* StackPaginationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1F010C242F73C60040627F /* StackPaginationController.swift */; };
-		AE5B864A242F90E400210A2C /* CardStackView_General.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5B8649242F90E400210A2C /* CardStackView_General.swift */; };
+		AE1F0106242F5FC80040627F /* CardContentRSSItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1F0105242F5FC80040627F /* CardContentRSSItem.swift */; };
+		AE1F010A242F70960040627F /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1F0109242F70960040627F /* CardView.swift */; };
+		AE5B864A242F90E400210A2C /* CardContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5B8649242F90E400210A2C /* CardContentView.swift */; };
 		AE5B864C242F921F00210A2C /* APIWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5B864B242F921F00210A2C /* APIWorker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9C15DAEC242FDFFC00E0E646 /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
+		9C34AD27242FE63E001457D2 /* PanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelView.swift; sourceTree = "<group>"; };
+		9C34AD29242FE8D7001457D2 /* PanelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelViewController.swift; sourceTree = "<group>"; };
 		AE1F00BD242E08BA0040627F /* covidInfo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = covidInfo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE1F00C0242E08BA0040627F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AE1F00C2242E08BA0040627F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -37,10 +42,9 @@
 		AE1F00D8242E25000040627F /* ScrollableStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollableStackView.swift; sourceTree = "<group>"; };
 		AE1F00FC242E3DB50040627F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		AE1F0103242F5BFD0040627F /* PaddingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingView.swift; sourceTree = "<group>"; };
-		AE1F0105242F5FC80040627F /* CardStackView_RSS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStackView_RSS.swift; sourceTree = "<group>"; };
-		AE1F0109242F70960040627F /* NewsCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCardView.swift; sourceTree = "<group>"; };
-		AE1F010C242F73C60040627F /* StackPaginationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackPaginationController.swift; sourceTree = "<group>"; };
-		AE5B8649242F90E400210A2C /* CardStackView_General.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStackView_General.swift; sourceTree = "<group>"; };
+		AE1F0105242F5FC80040627F /* CardContentRSSItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardContentRSSItem.swift; sourceTree = "<group>"; };
+		AE1F0109242F70960040627F /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		AE5B8649242F90E400210A2C /* CardContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardContentView.swift; sourceTree = "<group>"; };
 		AE5B864B242F921F00210A2C /* APIWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIWorker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -55,6 +59,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9C15DAEE242FE1A100E0E646 /* CardContent */ = {
+			isa = PBXGroup;
+			children = (
+				AE5B8649242F90E400210A2C /* CardContentView.swift */,
+				9C15DAEF242FE1A800E0E646 /* CardContentSubtypes */,
+			);
+			path = CardContent;
+			sourceTree = "<group>";
+		};
+		9C15DAEF242FE1A800E0E646 /* CardContentSubtypes */ = {
+			isa = PBXGroup;
+			children = (
+				AE1F0105242F5FC80040627F /* CardContentRSSItem.swift */,
+			);
+			path = CardContentSubtypes;
+			sourceTree = "<group>";
+		};
+		9C15DAF0242FE1C300E0E646 /* Card */ = {
+			isa = PBXGroup;
+			children = (
+				AE1F0109242F70960040627F /* CardView.swift */,
+				9C15DAEE242FE1A100E0E646 /* CardContent */,
+			);
+			path = Card;
+			sourceTree = "<group>";
+		};
 		AE1F00B4242E08BA0040627F = {
 			isa = PBXGroup;
 			children = (
@@ -88,9 +118,10 @@
 		AE1F0107242F63A20040627F /* StackUI */ = {
 			isa = PBXGroup;
 			children = (
-				AE1F010C242F73C60040627F /* StackPaginationController.swift */,
-				AE1F00D8242E25000040627F /* ScrollableStackView.swift */,
-				AE1F0109242F70960040627F /* NewsCardView.swift */,
+				9C34AD29242FE8D7001457D2 /* PanelViewController.swift */,
+				9C15DAEC242FDFFC00E0E646 /* BoardView.swift */,
+				9C34AD27242FE63E001457D2 /* PanelView.swift */,
+				9C15DAF0242FE1C300E0E646 /* Card */,
 				AE1F0108242F6F6B0040627F /* UtilityViews */,
 			);
 			path = StackUI;
@@ -99,9 +130,8 @@
 		AE1F0108242F6F6B0040627F /* UtilityViews */ = {
 			isa = PBXGroup;
 			children = (
+				AE1F00D8242E25000040627F /* ScrollableStackView.swift */,
 				AE1F0103242F5BFD0040627F /* PaddingView.swift */,
-				AE1F0105242F5FC80040627F /* CardStackView_RSS.swift */,
-				AE5B8649242F90E400210A2C /* CardStackView_General.swift */,
 			);
 			path = UtilityViews;
 			sourceTree = "<group>";
@@ -213,18 +243,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AE1F010A242F70960040627F /* NewsCardView.swift in Sources */,
+				AE1F010A242F70960040627F /* CardView.swift in Sources */,
 				AE1F00C5242E08BA0040627F /* ViewController.swift in Sources */,
-				AE1F0106242F5FC80040627F /* CardStackView_RSS.swift in Sources */,
-				AE5B864A242F90E400210A2C /* CardStackView_General.swift in Sources */,
+				9C15DAED242FDFFC00E0E646 /* BoardView.swift in Sources */,
+				AE1F0106242F5FC80040627F /* CardContentRSSItem.swift in Sources */,
+				AE5B864A242F90E400210A2C /* CardContentView.swift in Sources */,
 				AE1F00FD242E3DB50040627F /* Extensions.swift in Sources */,
-				AE1F010D242F73C60040627F /* StackPaginationController.swift in Sources */,
+				9C34AD28242FE63E001457D2 /* PanelView.swift in Sources */,
 				AE1F00C1242E08BA0040627F /* AppDelegate.swift in Sources */,
 				AE1F00D9242E25000040627F /* ScrollableStackView.swift in Sources */,
 				AE1F00D5242E09FA0040627F /* XMLParserManager.swift in Sources */,
 				AE1F0104242F5BFD0040627F /* PaddingView.swift in Sources */,
 				AE5B864C242F921F00210A2C /* APIWorker.swift in Sources */,
 				AE1F00C3242E08BA0040627F /* SceneDelegate.swift in Sources */,
+				9C34AD2A242FE8D7001457D2 /* PanelViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
