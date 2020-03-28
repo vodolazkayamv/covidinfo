@@ -36,33 +36,31 @@ class ViewController: UIViewController, XMLParserDelegate {
         loadData()
         
         for item in myFeed {
-            let containerView : UIView = UIView();
+            let customView : PaddingView = PaddingView();
+            let containerView : PaddingView = PaddingView()
+            containerView.setSubView(subview: customView)
             
-            let customView : UIView = UIView();
+            
+            
             customView.backgroundColor = .white
             customView.layer.cornerRadius = 10;
             
             customView.layer.shadowColor = UIColor.black.cgColor
             customView.layer.shadowOffset = CGSize(width: 0, height: 1.0)
             customView.layer.shadowOpacity = 0.2
-            customView.layer.shadowRadius = 4.0
+            customView.layer.shadowRadius = 5.0
             
-            
-            
-            customView.translatesAutoresizingMaskIntoConstraints = false;
             
             let titleLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: 20, height: Int.max))
             titleLabel.numberOfLines = 0
             titleLabel.text = item.title
-            titleLabel.font = UIFont.systemFont(ofSize: 16, weight: .black)
+            titleLabel.font = UIFont.systemFont(ofSize: 18, weight: .black)
             titleLabel.translatesAutoresizingMaskIntoConstraints = false
             titleLabel.sizeToFit()
             
             let descriptionLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: 20, height: Int.max))
             descriptionLabel.numberOfLines = 0
-//            descriptionLabel.text = item.itemDescription
             descriptionLabel.attributedText = NSAttributedString(html: item.itemDescription)
-
             descriptionLabel.font = UIFont.systemFont(ofSize: 16, weight: .light)
             descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
             descriptionLabel.sizeToFit()
@@ -71,25 +69,14 @@ class ViewController: UIViewController, XMLParserDelegate {
             subStackView.translatesAutoresizingMaskIntoConstraints = false
             subStackView.axis = .vertical
             subStackView.spacing = 5
-            customView.addSubview(subStackView)
             
-            subStackView.leadingAnchor.constraint(equalTo: customView.leadingAnchor, constant: 10).isActive = true
-            subStackView.trailingAnchor.constraint(equalTo: customView.trailingAnchor, constant: -10).isActive = true
             titleLabel.widthAnchor.constraint(equalTo:subStackView.widthAnchor).isActive = true
             descriptionLabel.widthAnchor.constraint(equalTo:subStackView.widthAnchor).isActive = true
-
-
-//            customView.heightAnchor.constraint(equalTo: subStackView.heightAnchor).isActive = true
-            customView.topAnchor.constraint(equalTo: subStackView.topAnchor, constant: -10).isActive = true
-            customView.bottomAnchor.constraint(equalTo: subStackView.bottomAnchor, constant: 10).isActive = true
-
             
-            containerView.addSubview(customView);
-            containerView.translatesAutoresizingMaskIntoConstraints = false;
-            containerView.leadingAnchor.constraint(equalTo: customView.leadingAnchor, constant: -10).isActive = true
-            containerView.trailingAnchor.constraint(equalTo: customView.trailingAnchor, constant: 10).isActive = true
-            containerView.topAnchor.constraint(equalTo: customView.topAnchor, constant: -10).isActive = true
-            containerView.bottomAnchor.constraint(equalTo: customView.bottomAnchor, constant: 10).isActive = true
+            customView.padding = 15;
+            customView.setSubView(subview: subStackView)
+            
+            
 
             scrollableStack.addArrangedView(view: containerView)
         }
