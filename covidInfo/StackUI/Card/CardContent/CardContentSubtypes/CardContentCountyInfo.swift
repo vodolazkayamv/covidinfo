@@ -11,38 +11,45 @@ import UIKit
 
 class CardContentCountyInfo: CardContentView {
     
-    var titleLabel : UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: Int.max))
-    var descriptionLabel : UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: Int.max))
-    var authorLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: Int.max))
-    var categoryLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: Int.max))
-    var enclosureLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: Int.max))
-    var guidLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: Int.max))
-    var pubDateLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: Int.max))
-    var sourceLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: Int.max))
-    var contentLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: Int.max))
-    
-    
     func fillWithJHUItem(item: JHUCountryInfo) {
         self.translatesAutoresizingMaskIntoConstraints = false
         self.axis = .vertical
         self.spacing = 5
         
-        setTitle(item: item)
-        setCases(item: item)
-        setActive(item: item)
-        setCritical(item: item)
-        setDeaths(item: item)
-        setRecovered(item: item)
+        setTitle(item)
+        setUpdatedTime(item)
+
+        setCases(item)
+        setActive(item)
+        setCritical(item)
+        setDeaths(item)
+        setRecovered(item)
     }
     
-    func setTitle(item:JHUCountryInfo) {
+
+    func setUpdatedTime(_ item:JHUCountryInfo) {
+        if let update : Date = item.updated {
+            let formatter = DateFormatter()
+            formatter.dateStyle = .long
+            formatter.timeStyle = .medium
+            formatter.locale = Locale.current
+            
+            let upstring = formatter.string(from: update)
+            self.addArrangedLabelWith(text: upstring, font: UIFont.systemFont(ofSize: 10, weight: UIFont.Weight.light))
+        }
+    }
+    
+    func setTitle(_ item:JHUCountryInfo) {
         self.addArrangedLabelWith(text: item.country, font: UIFont.systemFont(ofSize: 26, weight: UIFont.Weight.black))
     }
     
-    func setCases(item: JHUCountryInfo)  {
+    func setCases(_ item: JHUCountryInfo)  {
         
         let casesString = "Выявлено: \(item.statisticsToday.cases)," + " сегодня: \(item.statisticsToday.todayCases)"
-        let deviationString = (item.casesDeviation > 0 ? "▲" + " \(item.casesDeviation)" : "▼" + " \(item.casesDeviation * (-1))") 
+        let deviationString = (item.casesDeviation > 0
+            ? "▲" + " \(item.casesDeviation)"
+            : "▼" + " \(item.casesDeviation * (-1))")
+        
         let casesAttrString = NSMutableAttributedString.init(string: casesString + " " + deviationString)
         (item.casesDeviation > 0
             ?
@@ -52,9 +59,12 @@ class CardContentCountyInfo: CardContentView {
         self.addArrangedLabelWith(attributedText: casesAttrString)
     }
     
-    func setDeaths(item: JHUCountryInfo)  {
+    func setDeaths(_ item: JHUCountryInfo)  {
         let deathString = "Погибли: \(item.statisticsToday.deaths)," + " сегодня: \(item.statisticsToday.todayDeaths)"
-        let deviationString = (item.deathDeviation > 0 ? "▲" + " \(item.deathDeviation)" : "▼" + " \(item.deathDeviation * (-1))")
+        let deviationString = (item.deathDeviation > 0
+            ? "▲" + " \(item.deathDeviation)"
+            : "▼" + " \(item.deathDeviation * (-1))")
+        
         let deathAttrString = NSMutableAttributedString.init(string: deathString + " " + deviationString)
         (item.deathDeviation > 0
             ?
@@ -64,18 +74,18 @@ class CardContentCountyInfo: CardContentView {
         self.addArrangedLabelWith(attributedText: deathAttrString)
     }
     
-    func setActive(item: JHUCountryInfo)  {
+    func setActive(_ item: JHUCountryInfo)  {
         self.addArrangedLabelWith(text: "Всего заражённых сейчас: \(item.statisticsToday.active)")
 
     }
     
-    func setCritical(item: JHUCountryInfo)  {
+    func setCritical(_ item: JHUCountryInfo)  {
         let casesString = NSMutableAttributedString.init(string:"В критическом состоянии: \(item.statisticsToday.critical)")
         self.addArrangedLabelWith(attributedText: casesString)
 
     }
     
-    func setRecovered(item: JHUCountryInfo)  {
+    func setRecovered(_ item: JHUCountryInfo)  {
         let casesString = NSMutableAttributedString.init(string:"Выздоровели: \(item.statisticsToday.recovered)")
         self.addArrangedLabelWith(attributedText: casesString)
 

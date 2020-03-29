@@ -42,6 +42,7 @@ class ViewController: UIViewController, XMLParserDelegate, UIScrollViewDelegate 
         APIWorker.askCOVIDStatisticsAll()
         
         majorBoard = BoardView()
+        majorBoard.title = "\nDaily COVID-19 Global Cases Report"
         self.panelViewContoller.add(board: majorBoard)
         self.majorBoard.addCopyrightLabelWith(text: "Data obtained from Coronavirus COVID-19 Global Cases by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University (JHU)")
 
@@ -86,7 +87,7 @@ class ViewController: UIViewController, XMLParserDelegate, UIScrollViewDelegate 
     {
         if let data = notification.userInfo as? [String: JHUCountryInfo]
         {
-            for (key, value) in data
+            for (_, value) in data
             {
                 DispatchQueue.main.async {
 
@@ -107,7 +108,7 @@ class ViewController: UIViewController, XMLParserDelegate, UIScrollViewDelegate 
     {
         if let data = notification.userInfo as? [String: JHUCountryInfo]
         {
-            for (key, value) in data
+            for (_, value) in data
             {
                 DispatchQueue.main.async {
 

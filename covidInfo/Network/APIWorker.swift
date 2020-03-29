@@ -17,6 +17,7 @@ class APIWorker {
                     do{
                         let decoder = JSONDecoder()
                         decoder.keyDecodingStrategy = .convertFromSnakeCase
+                        decoder.dateDecodingStrategy = .millisecondsSince1970
                         let today : COVIDStat = try decoder.decode(COVIDStat.self, from: dataResponse)
                         
                         askAPIvia(urlString: "https://corona.lmao.ninja/v2/historical/russia",
@@ -24,6 +25,7 @@ class APIWorker {
                                     do{
                                         let decoder = JSONDecoder()
                                         decoder.keyDecodingStrategy = .convertFromSnakeCase
+                                        decoder.dateDecodingStrategy = .millisecondsSince1970
                                         let result : History = try decoder.decode(History.self, from: dataResponse)
 
                                         var history : HistoryDecoded = HistoryDecoded(country: result.country, casesHistory: [], deathHistory: [])
@@ -80,6 +82,7 @@ class APIWorker {
                         
                         let decoder = JSONDecoder()
                         decoder.keyDecodingStrategy = .convertFromSnakeCase
+                        decoder.dateDecodingStrategy = .millisecondsSince1970
                         let countries : [COVIDStat] = try decoder.decode([COVIDStat].self, from: dataResponse)
                         
                         for country in countries {
@@ -88,6 +91,7 @@ class APIWorker {
                                         do{
                                             let decoder = JSONDecoder()
                                             decoder.keyDecodingStrategy = .convertFromSnakeCase
+                                            decoder.dateDecodingStrategy = .millisecondsSince1970
                                             let result : History = try decoder.decode(History.self, from: dataResponse)
 
                                             var history : HistoryDecoded = HistoryDecoded(country: result.country, casesHistory: [], deathHistory: [])
