@@ -11,15 +11,15 @@ import UIKit
 class ViewController: UIViewController, XMLParserDelegate, UIScrollViewDelegate {
     
     let resources : [[String:String]] = [
-        [ "title" : "Johns Hopkins Medicine science and medical news ",
+        [ "title" : "\nJohns Hopkins Medicine science and medical news ",
           "link"  : "https://www.hopkinsmedicine.org/news/media/releases?format=rss"
         ],
         [
-        "title" : "WHO Covid-19 News" ,
+        "title" : "\nWHO Covid-19 News" ,
         "link"  : "https://www.who.int/rss-feeds/covid19-news-english.xml"
         ],
         [
-        "title" : "CDC: Coronavirus Disease 2019 (COVID-19) Situation Update 1" ,
+        "title" : "\nCDC: Coronavirus Disease 2019 (COVID-19) Situation Update 1" ,
         "link"  : "https://tools.cdc.gov/api/v2/resources/media/404952.rss"
         ]
     ]
@@ -38,7 +38,6 @@ class ViewController: UIViewController, XMLParserDelegate, UIScrollViewDelegate 
         self.panelViewContoller = PanelViewController(superview: self.view)
         self.view.addSubview(panelViewContoller.view)
         
-//        APIWorker.askCOVIDStatisticsRussia()
         APIWorker.askCOVIDStatisticsAll()
         
         majorBoard = BoardView()
@@ -46,6 +45,7 @@ class ViewController: UIViewController, XMLParserDelegate, UIScrollViewDelegate 
         self.panelViewContoller.add(board: majorBoard)
         self.majorBoard.addCopyrightLabelWith(text: "Data obtained from Coronavirus COVID-19 Global Cases by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University (JHU)")
 
+        self.createBoardsWith(sources: resources)
         
         NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveDataNative(_:)), name: .didReceiveNativeCountryData, object: APIWorker.self)
         
@@ -54,15 +54,20 @@ class ViewController: UIViewController, XMLParserDelegate, UIScrollViewDelegate 
     
     func createBoardsWith(sources: [[String:String]]) {
         
-        for source in sources {
-            let feed : [RSS_Item] = loadData(urlString: source["link"] ?? "")
-            let board : BoardView = BoardView()
-            board.title = source["title"] ?? ""
-            for item in feed {
-                let newsCard: CardView = CardView(withRSS: item)
-                board.add(card: newsCard)
+        let serialQueue = DispatchQueue(label: "news_queue")
+        serialQueue.async {
+            for source in sources {
+                let feed : [RSS_Item] = self.loadData(urlString: source["link"] ?? "")
+                DispatchQueue.main.async {
+                    let board : BoardView = BoardView()
+                    board.title = source["title"] ?? ""
+                    for item in feed {
+                        let newsCard: CardView = CardView(withRSS: item)
+                        board.add(card: newsCard)
+                    }
+                    self.panelViewContoller.add(board: board)
+                }
             }
-            panelViewContoller.add(board: board)
         }
     }
     
