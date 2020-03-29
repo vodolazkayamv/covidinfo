@@ -32,13 +32,13 @@ class ViewController: UIViewController, XMLParserDelegate, UIScrollViewDelegate 
         // Do any additional setup after loading the view.
         
 //        self.view.backgroundColor = .systemYellow
-        print("HelloWorld")
+        print("Hello COVID-19 Info!")
         
         self.view.backgroundColor = .systemGray6
         self.panelViewContoller = PanelViewController(superview: self.view)
         self.view.addSubview(panelViewContoller.view)
         
-        APIWorker.askCOVIDStatisticsRussia()
+//        APIWorker.askCOVIDStatisticsRussia()
         APIWorker.askCOVIDStatisticsAll()
         
         majorBoard = BoardView()
@@ -114,10 +114,16 @@ class ViewController: UIViewController, XMLParserDelegate, UIScrollViewDelegate 
 
                     let novelCardContentView : CardContentCountyInfo = CardContentCountyInfo()
                     novelCardContentView.fillWithJHUItem(item: value)
-
                     let novelCard : CardView = CardView(with: novelCardContentView)
                     
-                    self.majorBoard.add(card: novelCard)
+                    let locale = Locale.current
+                    let currentRegion = locale.regionCode?.lowercased() ?? ""
+                    
+                    if currentRegion == value.statisticsToday.countryInfo.iso2?.lowercased() {
+                        self.majorBoard.add(card: novelCard, at: 0)
+                    } else {
+                        self.majorBoard.add(card: novelCard)
+                    }
                 }
             }
         }
