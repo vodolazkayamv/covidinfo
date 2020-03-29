@@ -104,4 +104,7 @@ class PanelViewController: UIViewController, UIScrollViewDelegate {
         self.panelView.add(board: board)
         configurePageControl()
     }
+    
+    // MARK: - notifications
+    
 }

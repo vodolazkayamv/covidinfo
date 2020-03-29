@@ -36,4 +36,23 @@ class CardContentView: UIStackView {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.widthAnchor.constraint(equalTo:self.widthAnchor).isActive = true
     }
+    
+    func addArrangedLabelWith(text: String, font: UIFont = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.regular))  {
+        let label : UILabel = UILabel()
+        label.numberOfLines = 0
+        label.text = text
+        label.font = font
+        label.sizeToFit()
+        
+        self.addArrangedSubview(label)
+    }
+    
+    func addArrangedLabelWith(attributedText: NSAttributedString)  {
+        let label : UILabel = UILabel()
+        label.numberOfLines = 0
+        label.attributedText = attributedText
+        label.sizeToFit()
+        
+        self.addArrangedSubview(label)
+    }
 }

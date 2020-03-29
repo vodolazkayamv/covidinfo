@@ -11,6 +11,9 @@ import UIKit
 class ViewController: UIViewController, XMLParserDelegate, UIScrollViewDelegate {
     
     let resources : [[String:String]] = [
+        [ "title" : "Johns Hopkins Medicine science and medical news ",
+          "link"  : "https://www.hopkinsmedicine.org/news/media/releases?format=rss"
+        ],
         [
         "title" : "WHO Covid-19 News" ,
         "link"  : "https://www.who.int/rss-feeds/covid19-news-english.xml"
@@ -18,16 +21,10 @@ class ViewController: UIViewController, XMLParserDelegate, UIScrollViewDelegate 
         [
         "title" : "CDC: Coronavirus Disease 2019 (COVID-19) Situation Update 1" ,
         "link"  : "https://tools.cdc.gov/api/v2/resources/media/404952.rss"
-        ],
-        [
-        "title" : "CDC: Coronavirus Disease 2019 (COVID-19) Situation Update 2" ,
-        "link"  : "https://tools.cdc.gov/api/v2/resources/media/404952.rss"
-        ],
-        [
-        "title" : "CDC: Coronavirus Disease 2019 (COVID-19) Situation Update 3" ,
-        "link"  : "https://tools.cdc.gov/api/v2/resources/media/404952.rss"
         ]
     ]
+    
+    var JHURussiaInfo : JHUCountryInfo = JHUCountryInfo()
         
     var panelViewContoller : PanelViewController!
 
@@ -43,8 +40,11 @@ class ViewController: UIViewController, XMLParserDelegate, UIScrollViewDelegate 
         self.panelViewContoller = PanelViewController(superview: self.view)
         self.view.addSubview(panelViewContoller.view)
         
-        createBoardsWith(sources: resources)
+        APIWorker.askCOVIDStatisticsRussia()
+
         
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveData(_:)), name: .didReceiveData, object: APIWorker.self)
     }
     
     func createBoardsWith(sources: [[String:String]]) {
@@ -61,6 +61,8 @@ class ViewController: UIViewController, XMLParserDelegate, UIScrollViewDelegate 
         }
     }
     
+    // MARK: - RSS
+    
     func loadData(urlString: String) -> [RSS_Item] {
         let url = URL(string: urlString)!
         return loadRss(url);
@@ -74,6 +76,34 @@ class ViewController: UIViewController, XMLParserDelegate, UIScrollViewDelegate 
         return myParser.feed()
     }
     
+    
+    // MARK: - notifications
+    @objc func onDidReceiveData(_ notification: Notification)
+    {
+        if let data = notification.userInfo as? [String: JHUCountryInfo]
+        {
+            for (key, value) in data
+            {
+                self.JHURussiaInfo = value
+                
+                DispatchQueue.main.async {
+                    let majorBoard : BoardView = BoardView()
+
+                    let novelCardContentView : CardContentCountyInfo = CardContentCountyInfo()
+                    novelCardContentView.fillWithJHUItem(item: value)
+
+                    let novelCard : CardView = CardView(with: novelCardContentView)
+                    
+                    majorBoard.add(card: novelCard)
+                    majorBoard.addCopyrightLabelWith(text: "Data obtained from Coronavirus COVID-19 Global Cases by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University (JHU)")
+                    
+                    self.panelViewContoller.add(board: majorBoard)
+                    
+                    //self.createBoardsWith(sources: self.resources)
+                }
+            }
+        }
+    }
     
 }
 

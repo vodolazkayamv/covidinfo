@@ -10,6 +10,8 @@
 		9C15DAED242FDFFC00E0E646 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C15DAEC242FDFFC00E0E646 /* BoardView.swift */; };
 		9C34AD28242FE63E001457D2 /* PanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C34AD27242FE63E001457D2 /* PanelView.swift */; };
 		9C34AD2A242FE8D7001457D2 /* PanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C34AD29242FE8D7001457D2 /* PanelViewController.swift */; };
+		9C34AD2C2430E923001457D2 /* DTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C34AD2B2430E922001457D2 /* DTO.swift */; };
+		9C34AD302430F7E2001457D2 /* CardContentCountyInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C34AD2F2430F7E2001457D2 /* CardContentCountyInfo.swift */; };
 		AE1F00C1242E08BA0040627F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1F00C0242E08BA0040627F /* AppDelegate.swift */; };
 		AE1F00C3242E08BA0040627F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1F00C2242E08BA0040627F /* SceneDelegate.swift */; };
 		AE1F00C5242E08BA0040627F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1F00C4242E08BA0040627F /* ViewController.swift */; };
@@ -30,6 +32,8 @@
 		9C15DAEC242FDFFC00E0E646 /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
 		9C34AD27242FE63E001457D2 /* PanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelView.swift; sourceTree = "<group>"; };
 		9C34AD29242FE8D7001457D2 /* PanelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelViewController.swift; sourceTree = "<group>"; };
+		9C34AD2B2430E922001457D2 /* DTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTO.swift; sourceTree = "<group>"; };
+		9C34AD2F2430F7E2001457D2 /* CardContentCountyInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardContentCountyInfo.swift; sourceTree = "<group>"; };
 		AE1F00BD242E08BA0040627F /* covidInfo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = covidInfo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE1F00C0242E08BA0040627F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AE1F00C2242E08BA0040627F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -72,6 +76,7 @@
 			isa = PBXGroup;
 			children = (
 				AE1F0105242F5FC80040627F /* CardContentRSSItem.swift */,
+				9C34AD2F2430F7E2001457D2 /* CardContentCountyInfo.swift */,
 			);
 			path = CardContentSubtypes;
 			sourceTree = "<group>";
@@ -141,6 +146,7 @@
 			children = (
 				AE1F00D4242E09FA0040627F /* XMLParserManager.swift */,
 				AE5B864B242F921F00210A2C /* APIWorker.swift */,
+				9C34AD2B2430E922001457D2 /* DTO.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -252,6 +258,8 @@
 				9C34AD28242FE63E001457D2 /* PanelView.swift in Sources */,
 				AE1F00C1242E08BA0040627F /* AppDelegate.swift in Sources */,
 				AE1F00D9242E25000040627F /* ScrollableStackView.swift in Sources */,
+				9C34AD302430F7E2001457D2 /* CardContentCountyInfo.swift in Sources */,
+				9C34AD2C2430E923001457D2 /* DTO.swift in Sources */,
 				AE1F00D5242E09FA0040627F /* XMLParserManager.swift in Sources */,
 				AE1F0104242F5BFD0040627F /* PaddingView.swift in Sources */,
 				AE5B864C242F921F00210A2C /* APIWorker.swift in Sources */,

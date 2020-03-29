@@ -9,21 +9,13 @@
 import Foundation
 import UIKit
 
-/*
-extension String {
-    var htmlToAttributedString: NSAttributedString? {
-        guard let data = data(using: .utf8) else { return NSAttributedString() }
-        do {
-            return try NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding:String.Encoding.utf8.rawValue], documentAttributes: nil)
-        } catch {
-            return NSAttributedString()
-        }
-    }
-    var htmlToString: String {
-        return htmlToAttributedString?.string ?? ""
-    }
+
+extension Notification.Name {
+    static let didReceiveData = Notification.Name("didReceiveData")
+    static let didCompleteTask = Notification.Name("didCompleteTask")
+    static let completedLengthyDownload = Notification.Name("completedLengthyDownload")
 }
-*/
+
 
 extension NSAttributedString {
     internal convenience init?(html: String) {
@@ -41,8 +33,41 @@ extension NSAttributedString {
     }
 }
 
-extension Notification.Name {
-    static let didReceiveData = Notification.Name("didReceiveData")
-    static let didCompleteTask = Notification.Name("didCompleteTask")
-    static let completedLengthyDownload = Notification.Name("completedLengthyDownload")
+extension NSMutableAttributedString {
+    func highlightNeedleIn(haystack:String, needle:String)  {
+        let range = (haystack as NSString).range(of: needle)
+        self.addAttribute(NSAttributedString.Key.font, value: UIFont.boldSystemFont(ofSize: 16) , range: range)
+        
+    }
+    
+    func highlightRisingNeedleIn(haystack:String, needle:String)  {
+        let fontSuper:UIFont? = UIFont(name: "Helvetica", size:14)
+
+        let range = (haystack as NSString).range(of: needle)
+        self.setAttributes([.font:fontSuper!,.baselineOffset:3], range: range)
+        self.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.red , range: range)
+    }
+    func highlightDesendingNeedleIn(haystack:String, needle:String)  {
+       let fontSuper:UIFont? = UIFont(name: "Helvetica", size:14)
+
+        let range = (haystack as NSString).range(of: needle)
+        self.setAttributes([.font:fontSuper!,.baselineOffset:0], range: range)
+        self.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.green , range: range)
+    }
 }
+
+extension UILabel {
+    func textDropShadow() {
+        self.layer.masksToBounds = false
+        self.layer.shadowRadius = 2.0
+        self.layer.shadowOpacity = 0.1
+        self.layer.shadowOffset = CGSize(width: 1, height: 1)
+    }
+
+    static func createCustomLabel() -> UILabel {
+        let label = UILabel()
+        label.textDropShadow()
+        return label
+    }
+}
+

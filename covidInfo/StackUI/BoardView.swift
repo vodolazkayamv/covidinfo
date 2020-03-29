@@ -42,6 +42,18 @@ class BoardView: UIView {
         cardsScrollableStackView.addArrangedView(view: card, aboveSubview: belowCard)
     }
     
-    
+    public func addCopyrightLabelWith(text: String) {
+        
+        let label : UILabel = UILabel()
+        label.numberOfLines = 0
+        label.text = text
+        label.textAlignment = .center
+        label.textColor = UIColor.systemGray2
+        label.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.regular)
+        label.sizeToFit()
+                label.textDropShadow()
+        
+        cardsScrollableStackView.addArrangedView(view: label)
+    }
     
 }

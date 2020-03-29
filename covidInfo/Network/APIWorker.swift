@@ -8,27 +8,74 @@
 
 import Foundation
 
-
-struct COVIDStat : Decodable {
-    let active, cases, critical, deaths, recovered, todayCases, todayDeaths: Int
-    let country : String
-    let deathsPerOneMillion, casesPerOneMillion : Float
-    let countryInfo : CountryInfo
-}
-
-struct CountryInfo : Decodable {
-    let _id : Int
-    let lat, long : Int
-    let flag, iso2, iso3 : String
-}
-
 class APIWorker {
 
 
+    class func askCOVIDStatisticsRussia() {
+        
+        askAPIvia(urlString: "https://corona.lmao.ninja/countries/Russia",
+                  completionHandler: { dataResponse in
+                    do{
+                        let decoder = JSONDecoder()
+                        decoder.keyDecodingStrategy = .convertFromSnakeCase
+                        let today : COVIDStat = try decoder.decode(COVIDStat.self, from: dataResponse)
+                        
+                        askAPIvia(urlString: "https://corona.lmao.ninja/v2/historical/russia",
+                                  completionHandler: { dataResponse in
+                                    do{
+                                        let decoder = JSONDecoder()
+                                        decoder.keyDecodingStrategy = .convertFromSnakeCase
+                                        let result : History = try decoder.decode(History.self, from: dataResponse)
+
+                                        var history : HistoryDecoded = HistoryDecoded(country: result.country, casesHistory: [], deathHistory: [])
+                                        for item in result.timeline.cases {
+                                            
+                                            let isoDate = item.key
+                                            let dateFormatter = DateFormatter()
+                                            dateFormatter.dateFormat = "MM/dd/yy"
+                                            let date = dateFormatter.date(from:isoDate)!
+                                            
+                                            let record : Case = Case(date: date, number: item.value)
+                                            history.casesHistory.append(record)
+                                        }
+                                        history.casesHistory = history.casesHistory.sorted(by: {
+                                            $0.date.compare($1.date) == .orderedDescending
+                                        })
+                                        
+                                        let JHURussiaInfo : JHUCountryInfo = JHUCountryInfo(today: today, history: history)
+                                        let dataDict:[String: JHUCountryInfo] = ["result": JHURussiaInfo]
+
+                                        NotificationCenter.default.post(name: .didReceiveData, object: self, userInfo: dataDict)
+
+                                        
+                                    } catch let parsingError {
+                                        print("Error", parsingError)
+                                    }
+                        })
+                        
+                    } catch let parsingError {
+                        print("Error", parsingError)
+                    }
+        })
+        
+    }
     
-    class func askCOVIDStatistics() {
-        //guard let url = URL(string: "https://corona.lmao.ninja/countries?sort=country") else {return}
-        //https://corona.lmao.ninja/countries/Russia
+    class func askAPIvia(urlString:String, completionHandler: @escaping (Data) -> Void) {
+        guard let url = URL(string: urlString) else {return}
+
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let dataResponse = data,
+            error == nil else {
+                print(error?.localizedDescription ?? "Response Error")
+                return
+            }
+            completionHandler(dataResponse)
+
+        }
+        task.resume()
+    }
+    
+    class func askCOVIDStatisticsRussia_Actual() {
         guard let url = URL(string: "https://corona.lmao.ninja/countries/Russia") else {return}
 
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
@@ -40,15 +87,16 @@ class APIWorker {
                 //here dataResponse received from a network request
 //                let jsonResponse = try JSONSerialization.jsonObject(with: dataResponse, options: []) as AnyObject
 //                print(jsonResponse) //Response result
-                
-                
+
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
-                let result = try decoder.decode(COVIDStat.self, from: dataResponse)
+                let result : COVIDStat = try decoder.decode(COVIDStat.self, from: dataResponse)
                 //let stats : [COVIDStat] = result.filter{ $0.country == "Russia" }
 
                 print(result)
-                NotificationCenter.default.post(name: .didReceiveData, object: result)
+                let dataDict:[String: COVIDStat] = ["result": result]
+
+                NotificationCenter.default.post(name: .didReceiveData, object: self, userInfo: dataDict)
 
 
              } catch let parsingError {
@@ -58,5 +106,49 @@ class APIWorker {
         task.resume()
     }
     
-    
+     class func askCOVIDStatisticsRussia_Historical() {
+            guard let url = URL(string: "https://corona.lmao.ninja/v2/historical/russia") else {return}
+
+            let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            guard let dataResponse = data,
+                      error == nil else {
+                      print(error?.localizedDescription ?? "Response Error")
+                      return }
+                do{
+                    //here dataResponse received from a network request
+    //                let jsonResponse = try JSONSerialization.jsonObject(with: dataResponse, options: []) as AnyObject
+    //                print(jsonResponse) //Response result
+
+                    let decoder = JSONDecoder()
+                    decoder.keyDecodingStrategy = .convertFromSnakeCase
+                    let result : History = try decoder.decode(History.self, from: dataResponse)
+                    //let stats : [COVIDStat] = result.filter{ $0.country == "Russia" }
+
+                    var h : HistoryDecoded = HistoryDecoded(country: result.country, casesHistory: [], deathHistory: [])
+                    for item in result.timeline.cases {
+                        
+                        let isoDate = item.key
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "MM/dd/yy"
+                        let date = dateFormatter.date(from:isoDate)!
+                        
+                        let record : Case = Case(date: date, number: item.value)
+                        h.casesHistory.append(record)
+                    }
+                    h.casesHistory = h.casesHistory.sorted(by: {
+                        $0.date.compare($1.date) == .orderedDescending
+                    })
+                    
+                    print(result)
+                    let dataDict:[String: History] = ["result": result]
+
+                    NotificationCenter.default.post(name: .didReceiveData, object: self, userInfo: dataDict)
+
+
+                 } catch let parsingError {
+                    print("Error", parsingError)
+               }
+            }
+            task.resume()
+        }
 }
