@@ -40,7 +40,29 @@ class CardContentCountyInfo: CardContentView {
     }
     
     func setTitle(_ item:JHUCountryInfo) {
-        self.addArrangedLabelWith(text: item.country, font: UIFont.systemFont(ofSize: 26, weight: UIFont.Weight.black))
+        
+        let countrySV : UIStackView = UIStackView()
+        countrySV.axis = .horizontal
+        countrySV.spacing = 20
+        
+        let label : UILabel = UILabel()
+        label.numberOfLines = 0
+        label.text = item.country
+        label.font = UIFont.systemFont(ofSize: 26, weight: UIFont.Weight.black)
+        label.sizeToFit()
+        
+        countrySV.addArrangedSubview(label);
+        
+        let flagImage : UIImage = UIImage(named: item.statisticsToday.countryInfo.iso2?.lowercased() ?? "") ?? UIImage()
+        let flagImageView : UIImageView = UIImageView(image: flagImage)
+        flagImageView.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        flagImageView.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        flagImageView.dropShadow()
+        
+        flagImageView.contentMode = .scaleAspectFit
+        countrySV.addArrangedSubview(flagImageView);
+        
+        self.addArrangedSubview(countrySV)
     }
     
     func setCases(_ item: JHUCountryInfo)  {

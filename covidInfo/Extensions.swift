@@ -82,3 +82,12 @@ extension UILabel {
     }
 }
 
+extension UIView {
+    func dropShadow() {
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowOffset = CGSize(width: 0.5, height: 0.5)
+        self.layer.shadowOpacity = 0.2
+        self.layer.shadowRadius = 1.0
+    }
+}
+
