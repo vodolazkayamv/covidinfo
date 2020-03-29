@@ -31,7 +31,7 @@ class PanelViewController: UIViewController, UIScrollViewDelegate {
         self.structureView.addArrangedSubview(pageController)
         self.structureView.addArrangedSubview(panelView)
         
-        titleLabel.text = "123"
+        titleLabel.text = ""
         setupConstraints(superview)
         configurePageControl()
     }
@@ -88,9 +88,9 @@ class PanelViewController: UIViewController, UIScrollViewDelegate {
     func configurePageControl() {
         self.pageController.numberOfPages = panelView.pages
         self.pageController.currentPage = 0
-        self.pageController.tintColor = UIColor.red
-        self.pageController.pageIndicatorTintColor = UIColor.black
-        self.pageController.currentPageIndicatorTintColor = UIColor.green
+        self.pageController.tintColor = UIColor.systemRed
+        self.pageController.pageIndicatorTintColor = UIColor.systemGray
+        self.pageController.currentPageIndicatorTintColor = UIColor.systemGreen
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
@@ -103,6 +103,10 @@ class PanelViewController: UIViewController, UIScrollViewDelegate {
      public func add(board: BoardView) {
         self.panelView.add(board: board)
         configurePageControl()
+        
+        if panelView.boards.count == 1 {
+            self.titleLabel.text = panelView.boards[0].title
+        }
     }
     
     // MARK: - notifications

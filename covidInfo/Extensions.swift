@@ -11,7 +11,9 @@ import UIKit
 
 
 extension Notification.Name {
-    static let didReceiveData = Notification.Name("didReceiveData")
+    static let didReceiveNativeCountryData = Notification.Name("didReceiveNativeCountryData")
+    static let didReceiveCountryData = Notification.Name("didReceiveCountryData")
+
     static let didCompleteTask = Notification.Name("didCompleteTask")
     static let completedLengthyDownload = Notification.Name("completedLengthyDownload")
 }
@@ -52,7 +54,7 @@ extension NSMutableAttributedString {
 
         let range = (haystack as NSString).range(of: needle)
         self.setAttributes([.font:fontSuper!,.baselineOffset:0], range: range)
-        self.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.green , range: range)
+        self.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.systemGreen , range: range)
     }
 }
 

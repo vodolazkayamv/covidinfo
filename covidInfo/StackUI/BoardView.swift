@@ -53,7 +53,7 @@ class BoardView: UIView {
         label.sizeToFit()
                 label.textDropShadow()
         
-        cardsScrollableStackView.addArrangedView(view: label)
+        cardsScrollableStackView.addArrangedView(view: label, at: 0)
     }
     
 }

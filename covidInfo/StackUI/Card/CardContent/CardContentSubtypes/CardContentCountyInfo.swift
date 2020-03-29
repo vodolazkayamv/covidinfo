@@ -29,7 +29,7 @@ class CardContentCountyInfo: CardContentView {
         
         setTitle(item: item)
         setCases(item: item)
-//        setActive(item: item)
+        setActive(item: item)
         setCritical(item: item)
         setDeaths(item: item)
         setRecovered(item: item)
@@ -42,7 +42,7 @@ class CardContentCountyInfo: CardContentView {
     func setCases(item: JHUCountryInfo)  {
         
         let casesString = "Выявлено: \(item.statisticsToday.cases)," + " сегодня: \(item.statisticsToday.todayCases)"
-        let deviationString = (item.casesDeviation > 0 ? "▲" : "▼") + " \(item.casesDeviation)"
+        let deviationString = (item.casesDeviation > 0 ? "▲" + " \(item.casesDeviation)" : "▼" + " \(item.casesDeviation * (-1))") 
         let casesAttrString = NSMutableAttributedString.init(string: casesString + " " + deviationString)
         (item.casesDeviation > 0
             ?
@@ -54,7 +54,7 @@ class CardContentCountyInfo: CardContentView {
     
     func setDeaths(item: JHUCountryInfo)  {
         let deathString = "Погибли: \(item.statisticsToday.deaths)," + " сегодня: \(item.statisticsToday.todayDeaths)"
-        let deviationString = (item.deathDeviation > 0 ? "▲" : "▼") + " \(item.deathDeviation)"
+        let deviationString = (item.deathDeviation > 0 ? "▲" + " \(item.deathDeviation)" : "▼" + " \(item.deathDeviation * (-1))")
         let deathAttrString = NSMutableAttributedString.init(string: deathString + " " + deviationString)
         (item.deathDeviation > 0
             ?
@@ -65,7 +65,7 @@ class CardContentCountyInfo: CardContentView {
     }
     
     func setActive(item: JHUCountryInfo)  {
-        self.addArrangedLabelWith(text: "Активны: \(item.statisticsToday.active)")
+        self.addArrangedLabelWith(text: "Всего заражённых сейчас: \(item.statisticsToday.active)")
 
     }
     

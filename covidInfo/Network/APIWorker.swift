@@ -12,7 +12,6 @@ class APIWorker {
 
 
     class func askCOVIDStatisticsRussia() {
-        
         askAPIvia(urlString: "https://corona.lmao.ninja/countries/Russia",
                   completionHandler: { dataResponse in
                     do{
@@ -38,14 +37,27 @@ class APIWorker {
                                             let record : Case = Case(date: date, number: item.value)
                                             history.casesHistory.append(record)
                                         }
+                                        for item in result.timeline.deaths {
+                                            
+                                            let isoDate = item.key
+                                            let dateFormatter = DateFormatter()
+                                            dateFormatter.dateFormat = "MM/dd/yy"
+                                            let date = dateFormatter.date(from:isoDate)!
+                                            
+                                            let record : Case = Case(date: date, number: item.value)
+                                            history.deathHistory.append(record)
+                                        }
                                         history.casesHistory = history.casesHistory.sorted(by: {
+                                            $0.date.compare($1.date) == .orderedDescending
+                                        })
+                                        history.deathHistory = history.deathHistory.sorted(by: {
                                             $0.date.compare($1.date) == .orderedDescending
                                         })
                                         
                                         let JHURussiaInfo : JHUCountryInfo = JHUCountryInfo(today: today, history: history)
                                         let dataDict:[String: JHUCountryInfo] = ["result": JHURussiaInfo]
 
-                                        NotificationCenter.default.post(name: .didReceiveData, object: self, userInfo: dataDict)
+                                        NotificationCenter.default.post(name: .didReceiveNativeCountryData, object: self, userInfo: dataDict)
 
                                         
                                     } catch let parsingError {
@@ -57,10 +69,75 @@ class APIWorker {
                         print("Error", parsingError)
                     }
         })
-        
     }
     
-    class func askAPIvia(urlString:String, completionHandler: @escaping (Data) -> Void) {
+    class func askCOVIDStatisticsAll() {
+        askAPIvia(urlString: "https://corona.lmao.ninja/countries?sort=todayCases",
+                  completionHandler: { dataResponse in
+                    do{
+//                        let jsonResponse = try JSONSerialization.jsonObject(with: dataResponse, options: []) as AnyObject
+//                        print(jsonResponse) //Response result
+                        
+                        let decoder = JSONDecoder()
+                        decoder.keyDecodingStrategy = .convertFromSnakeCase
+                        let countries : [COVIDStat] = try decoder.decode([COVIDStat].self, from: dataResponse)
+                        
+                        for country in countries {
+                            askAPIvia(urlString: "https://corona.lmao.ninja/v2/historical/" + country.country,
+                                      completionHandler: { dataResponse in
+                                        do{
+                                            let decoder = JSONDecoder()
+                                            decoder.keyDecodingStrategy = .convertFromSnakeCase
+                                            let result : History = try decoder.decode(History.self, from: dataResponse)
+
+                                            var history : HistoryDecoded = HistoryDecoded(country: result.country, casesHistory: [], deathHistory: [])
+                                            for item in result.timeline.cases {
+                                                
+                                                let isoDate = item.key
+                                                let dateFormatter = DateFormatter()
+                                                dateFormatter.dateFormat = "MM/dd/yy"
+                                                let date = dateFormatter.date(from:isoDate)!
+                                                
+                                                let record : Case = Case(date: date, number: item.value)
+                                                history.casesHistory.append(record)
+                                            }
+                                            for item in result.timeline.deaths {
+                                                
+                                                let isoDate = item.key
+                                                let dateFormatter = DateFormatter()
+                                                dateFormatter.dateFormat = "MM/dd/yy"
+                                                let date = dateFormatter.date(from:isoDate)!
+                                                
+                                                let record : Case = Case(date: date, number: item.value)
+                                                history.deathHistory.append(record)
+                                            }
+                                            history.casesHistory = history.casesHistory.sorted(by: {
+                                                $0.date.compare($1.date) == .orderedDescending
+                                            })
+                                            history.deathHistory = history.deathHistory.sorted(by: {
+                                                $0.date.compare($1.date) == .orderedDescending
+                                            })
+                                            
+                                            let JHUSomeCountryInfo : JHUCountryInfo = JHUCountryInfo(today: country, history: history)
+                                            let dataDict:[String: JHUCountryInfo] = ["result": JHUSomeCountryInfo]
+
+                                            NotificationCenter.default.post(name: .didReceiveCountryData, object: self, userInfo: dataDict)
+                                            
+                                        } catch let parsingError {
+                                            print("Error", parsingError)
+                                        }
+                            })
+
+                        }
+                        
+                        
+                    } catch let parsingError {
+                        print("Error", parsingError)
+                    }
+        })
+    }
+    
+    private class func askAPIvia(urlString:String, completionHandler: @escaping (Data) -> Void) {
         guard let url = URL(string: urlString) else {return}
 
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
@@ -96,7 +173,7 @@ class APIWorker {
                 print(result)
                 let dataDict:[String: COVIDStat] = ["result": result]
 
-                NotificationCenter.default.post(name: .didReceiveData, object: self, userInfo: dataDict)
+                NotificationCenter.default.post(name: .didReceiveNativeCountryData, object: self, userInfo: dataDict)
 
 
              } catch let parsingError {
@@ -142,7 +219,7 @@ class APIWorker {
                     print(result)
                     let dataDict:[String: History] = ["result": result]
 
-                    NotificationCenter.default.post(name: .didReceiveData, object: self, userInfo: dataDict)
+                    NotificationCenter.default.post(name: .didReceiveNativeCountryData, object: self, userInfo: dataDict)
 
 
                  } catch let parsingError {

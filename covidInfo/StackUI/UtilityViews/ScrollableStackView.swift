@@ -100,8 +100,8 @@ class ScrollableStackView: UIScrollView {
         self.stackView.insertSubview(view, aboveSubview: aboveSubview)
     }
     func addArrangedView(view: UIView, belowSubview: UIView)  {
-        view.translatesAutoresizingMaskIntoConstraints = false;
-        self.stackView.insertSubview(view, aboveSubview: belowSubview)
+//        view.translatesAutoresizingMaskIntoConstraints = false;
+        self.stackView.insertSubview(view, belowSubview: belowSubview)
     }
     
 }

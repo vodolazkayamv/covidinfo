@@ -23,11 +23,9 @@ class ViewController: UIViewController, XMLParserDelegate, UIScrollViewDelegate 
         "link"  : "https://tools.cdc.gov/api/v2/resources/media/404952.rss"
         ]
     ]
-    
-    var JHURussiaInfo : JHUCountryInfo = JHUCountryInfo()
         
     var panelViewContoller : PanelViewController!
-
+    var majorBoard : BoardView = BoardView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,10 +39,16 @@ class ViewController: UIViewController, XMLParserDelegate, UIScrollViewDelegate 
         self.view.addSubview(panelViewContoller.view)
         
         APIWorker.askCOVIDStatisticsRussia()
+        APIWorker.askCOVIDStatisticsAll()
+        
+        majorBoard = BoardView()
+        self.panelViewContoller.add(board: majorBoard)
+        self.majorBoard.addCopyrightLabelWith(text: "Data obtained from Coronavirus COVID-19 Global Cases by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University (JHU)")
 
         
+        NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveDataNative(_:)), name: .didReceiveNativeCountryData, object: APIWorker.self)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveData(_:)), name: .didReceiveData, object: APIWorker.self)
+        NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveData(_:)), name: .didReceiveCountryData, object: APIWorker.self)
     }
     
     func createBoardsWith(sources: [[String:String]]) {
@@ -78,28 +82,41 @@ class ViewController: UIViewController, XMLParserDelegate, UIScrollViewDelegate 
     
     
     // MARK: - notifications
-    @objc func onDidReceiveData(_ notification: Notification)
+    @objc func onDidReceiveDataNative(_ notification: Notification)
     {
         if let data = notification.userInfo as? [String: JHUCountryInfo]
         {
             for (key, value) in data
             {
-                self.JHURussiaInfo = value
-                
                 DispatchQueue.main.async {
-                    let majorBoard : BoardView = BoardView()
 
                     let novelCardContentView : CardContentCountyInfo = CardContentCountyInfo()
                     novelCardContentView.fillWithJHUItem(item: value)
 
                     let novelCard : CardView = CardView(with: novelCardContentView)
                     
-                    majorBoard.add(card: novelCard)
-                    majorBoard.addCopyrightLabelWith(text: "Data obtained from Coronavirus COVID-19 Global Cases by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University (JHU)")
+                    self.majorBoard.add(card: novelCard, at: 0)
                     
-                    self.panelViewContoller.add(board: majorBoard)
                     
-                    //self.createBoardsWith(sources: self.resources)
+                }
+            }
+        }
+    }
+    
+    @objc func onDidReceiveData(_ notification: Notification)
+    {
+        if let data = notification.userInfo as? [String: JHUCountryInfo]
+        {
+            for (key, value) in data
+            {
+                DispatchQueue.main.async {
+
+                    let novelCardContentView : CardContentCountyInfo = CardContentCountyInfo()
+                    novelCardContentView.fillWithJHUItem(item: value)
+
+                    let novelCard : CardView = CardView(with: novelCardContentView)
+                    
+                    self.majorBoard.add(card: novelCard)
                 }
             }
         }

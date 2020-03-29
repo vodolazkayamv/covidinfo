@@ -11,14 +11,14 @@ import Foundation
 struct COVIDStat : Decodable {
     let active, cases, critical, deaths, recovered, todayCases, todayDeaths: Int
     let country : String
-    let deathsPerOneMillion, casesPerOneMillion : Float
+    let deathsPerOneMillion, casesPerOneMillion : Float?
     let countryInfo : CountryInfo
 }
 
 struct CountryInfo : Decodable {
-    let _id : Int
-    let lat, long : Int
-    let flag, iso2, iso3 : String
+    let _id : Int?
+    let lat, long : Float
+    let flag, iso2, iso3 : String?
 }
 
 struct History : Decodable  {
@@ -39,7 +39,7 @@ struct Case {
 struct HistoryDecoded {
     let country: String
     var casesHistory : [Case]
-    let deathHistory : [Case]
+    var deathHistory : [Case]
 }
 
 class JHUCountryInfo : CustomStringConvertible {
@@ -63,6 +63,13 @@ class JHUCountryInfo : CustomStringConvertible {
     
     var casesDeviation : Int {
         get {
+            if (self.history.casesHistory.count == 0) {
+                return 0
+            }
+            if (self.history.casesHistory.count == 1) {
+                return self.history.casesHistory[0].number
+            }
+            
             let yesterdayCases = self.history.casesHistory[0].number - self.history.casesHistory[1].number
             let todayCases = self.statisticsToday.todayCases
             
@@ -72,6 +79,13 @@ class JHUCountryInfo : CustomStringConvertible {
     
     var deathDeviation : Int {
         get {
+            if (self.history.deathHistory.count == 0) {
+                return 0
+            }
+            if (self.history.deathHistory.count == 1) {
+                return self.history.deathHistory[0].number
+            }
+            
             let yesterdayCases = self.history.deathHistory.first?.number
             let todayCases = self.statisticsToday.deaths
             
