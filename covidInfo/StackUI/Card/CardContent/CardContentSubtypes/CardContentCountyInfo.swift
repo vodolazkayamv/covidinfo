@@ -17,26 +17,27 @@ class CardContentCountyInfo: CardContentView {
         self.spacing = 15
         
         setTitle(item)
-//        setUpdatedTime(item)
+        //        setUpdatedTime(item)
         
-        let infoCards : UIStackView = UIStackView()
-        self.addArrangedSubview(infoCards)
-        infoCards.axis = .horizontal
-        infoCards.spacing = 5
-        infoCards.distribution = .fillEqually
+        //        let infoCards : UIStackView = UIStackView()
+        //        self.addArrangedSubview(infoCards)
+        //        infoCards.axis = .horizontal
+        //        infoCards.spacing = 5
+        //        infoCards.distribution = .fillEqually
+        //
+        //        infoCards.addArrangedSubview(setupCasesCard(item))
+        //        infoCards.addArrangedSubview(setupDeathsCard(item))
+        //        infoCards.addArrangedSubview(setupRecoveredCard(item))
         
-        infoCards.addArrangedSubview(setupCasesCard(item))
-        infoCards.addArrangedSubview(setupDeathsCard(item))
-        infoCards.addArrangedSubview(setupRecoveredCard(item))
-
-//        setCases(item)
-//        setActive(item)
-//        setCritical(item)
-//        setDeaths(item)
-//        setRecovered(item)
+        setGeneralInfo(item)
+        
+        setCases(item)
+        setDeaths(item)
+        
+        
     }
     
-
+    
     func setUpdatedTime(_ item:JHUCountryInfo) -> UILabel {
         if let update : Date = item.updated {
             let formatter = DateFormatter()
@@ -115,7 +116,7 @@ class CardContentCountyInfo: CardContentView {
         let label : UILabel = labelWith(font: "AvenirNext-Medium", size: 16)
         label.text = value
         label.adjustsFontSizeToFitWidth  = true
-
+        
         return label
     }
     
@@ -130,7 +131,7 @@ class CardContentCountyInfo: CardContentView {
         let casesAttrString = NSMutableAttributedString.init(string: "\(value)" + " " + deviationString)
         (deviation > 0
             ?
-            casesAttrString.highlightRisingNeedleIn(haystack: casesAttrString.string, needle: deviationString)
+                casesAttrString.highlightRisingNeedleIn(haystack: casesAttrString.string, needle: deviationString)
             :
             casesAttrString.highlightDesendingNeedleIn(haystack: casesAttrString.string, needle: deviationString))
         
@@ -165,14 +166,14 @@ class CardContentCountyInfo: CardContentView {
         cardContent.axis = .vertical
         cardContent.spacing = 0
         card.setSubView(subview: cardContent)
-
+        
         let titleLabel : UILabel = initTitleLabel(title: "cases".localized())
         titleLabel.textColor = UIColor.pastelCasesFont
         cardContent.addArrangedSubview(titleLabel)
-
+        
         let valueLabel : UILabel = initValueLabel(value: "\(item.statisticsToday.cases)")
         cardContent.addArrangedSubview(valueLabel)
-
+        
         let todayValueLabel : UILabel = initTodayLabelFor(item.statisticsToday.todayCases, deviation: item.casesDeviation)
         cardContent.addArrangedSubview(todayValueLabel)
         
@@ -190,14 +191,14 @@ class CardContentCountyInfo: CardContentView {
         cardContent.axis = .vertical
         cardContent.spacing = 0
         card.setSubView(subview: cardContent)
-
+        
         let titleLabel : UILabel = initTitleLabel(title: "deaths".localized())
         titleLabel.textColor = UIColor.pastelDeathFont
         cardContent.addArrangedSubview(titleLabel)
-
+        
         let valueLabel : UILabel = initValueLabel(value: "\(item.statisticsToday.deaths)")
         cardContent.addArrangedSubview(valueLabel)
-
+        
         let todayValueLabel : UILabel = initTodayLabelFor(item.statisticsToday.todayDeaths, deviation: item.deathDeviation)
         cardContent.addArrangedSubview(todayValueLabel)
         
@@ -215,65 +216,95 @@ class CardContentCountyInfo: CardContentView {
         cardContent.axis = .vertical
         cardContent.spacing = 0
         card.setSubView(subview: cardContent)
-
+        
         let titleLabel : UILabel = initTitleLabel(title: "recovered".localized())
         titleLabel.textColor = UIColor.pastelRecoveredFont
         cardContent.addArrangedSubview(titleLabel)
-
+        
         let valueLabel : UILabel = initValueLabel(value: "\(item.statisticsToday.recovered)")
         cardContent.addArrangedSubview(valueLabel)
-
+        
         
         
         return card;
     }
     
     func setCases(_ item: JHUCountryInfo)  {
-        
-        let casesString = "cases".localized() +  ": \(item.statisticsToday.cases), " + "today".localized() + ": \(item.statisticsToday.todayCases)"
-        let deviationString = (item.casesDeviation > 0
-            ? "▲" + " \(item.casesDeviation)"
-            : "▼" + " \(item.casesDeviation * (-1))")
-        
-        let casesAttrString = NSMutableAttributedString.init(string: casesString + " " + deviationString)
-        (item.casesDeviation > 0
-            ?
-            casesAttrString.highlightRisingNeedleIn(haystack: casesAttrString.string, needle: deviationString)
-            :
-            casesAttrString.highlightDesendingNeedleIn(haystack: casesAttrString.string, needle: deviationString))
-        self.addArrangedLabelWith(attributedText: casesAttrString)
+        setupRowWithValues(title: "cases".localized(),
+                           allTimeValue: item.statisticsToday.cases,
+                           todayValue: item.statisticsToday.todayCases,
+                           deviationValue: item.casesDeviation)
     }
     
+    
     func setDeaths(_ item: JHUCountryInfo)  {
-        let deathString = "deaths".localized() + ": \(item.statisticsToday.deaths), " + "today".localized() + ": \(item.statisticsToday.todayDeaths)"
-        let deviationString = (item.deathDeviation > 0
-            ? "▲" + " \(item.deathDeviation)"
-            : "▼" + " \(item.deathDeviation * (-1))")
+        setupRowWithValues(title: "deaths".localized(),
+                           allTimeValue: item.statisticsToday.deaths,
+                           todayValue: item.statisticsToday.todayDeaths,
+                           deviationValue: item.deathDeviation)
+    }
+    
+    func setupRowWithValues(title: String, allTimeValue : Int, todayValue: Int, deviationValue : Int)  {
+        let titleLabel : UILabel = UILabel()
+        titleLabel.text = title
+        titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        titleLabel.textAlignment = .left
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: self.frame.width/4).isActive = true
+        titleLabel.textColor = .darkText
         
-        let deathAttrString = NSMutableAttributedString.init(string: deathString + " " + deviationString)
-        (item.deathDeviation > 0
+        let deviationString = (
+            deviationValue > 0
+                ? "▲" + " \(deviationValue)"
+                : "▼" + " \(deviationValue * (-1))")
+        
+        let deathAttrString = NSMutableAttributedString.init(string: deviationString)
+        (deviationValue > 0
             ?
-            deathAttrString.highlightRisingNeedleIn(haystack: deathAttrString.string, needle: deviationString)
+                deathAttrString.highlightRisingNeedleIn(haystack: deathAttrString.string, needle: deviationString)
             :
             deathAttrString.highlightDesendingNeedleIn(haystack: deathAttrString.string, needle: deviationString))
-        self.addArrangedLabelWith(attributedText: deathAttrString)
+        
+        let sv : UIStackView = UIStackView(arrangedSubviews:  [titleLabel,
+                                                               CaptionedLabel.init(caption: "ALL", text: "\(allTimeValue)", bold: true),
+                                                               CaptionedLabel.init(caption: "TODAY", text: "\(todayValue)"),
+                                                               CaptionedLabel.init(caption: "DEVIATION", text: deathAttrString)
+        ])
+        sv.axis = .horizontal
+        sv.spacing = 10
+        //        sv.alignment = .lastBaseline
+        sv.distribution = .fillEqually
+        self.addArrangedSubview(sv)
+    }
+    
+    func setGeneralInfo(_ item: JHUCountryInfo) {
+        let sv : UIStackView = UIStackView(arrangedSubviews:  [
+            CaptionedLabel.init(caption: "ACTIVE", text: "\(item.statisticsToday.active)"),
+            CaptionedLabel.init(caption: "CRITICAL", text: "\(item.statisticsToday.critical)"),
+            CaptionedLabel.init(caption: "RECOVERED", text: "\(item.statisticsToday.recovered)")
+        ])
+        sv.axis = .horizontal
+        sv.spacing = 5
+        sv.alignment = .lastBaseline
+        sv.distribution = .fillEqually
+        self.addArrangedSubview(sv)
     }
     
     func setActive(_ item: JHUCountryInfo)  {
         self.addArrangedLabelWith(text: "active".localized() + ": \(item.statisticsToday.active)")
-
+        
     }
     
     func setCritical(_ item: JHUCountryInfo)  {
         let casesString = NSMutableAttributedString.init(string: "critical".localized() + ": \(item.statisticsToday.critical)")
         self.addArrangedLabelWith(attributedText: casesString)
-
+        
     }
     
     func setRecovered(_ item: JHUCountryInfo)  {
         let casesString = NSMutableAttributedString.init(string: "recovered".localized() + ": \(item.statisticsToday.recovered)")
         self.addArrangedLabelWith(attributedText: casesString)
-
+        
     }
-   
+    
 }

@@ -27,6 +27,8 @@ class ViewController: UIViewController, XMLParserDelegate, UIScrollViewDelegate 
     var panelViewContoller : PanelViewController!
     var majorBoard : BoardView = BoardView()
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -34,7 +36,7 @@ class ViewController: UIViewController, XMLParserDelegate, UIScrollViewDelegate 
 //        self.view.backgroundColor = .systemYellow
         print("Hello COVID-19 Info!")
         
-        //self.view.backgroundColor = .systemGray6
+        self.view.backgroundColor = .systemGray6
         self.panelViewContoller = PanelViewController(superview: self.view)
         self.view.addSubview(panelViewContoller.view)
         
@@ -47,14 +49,8 @@ class ViewController: UIViewController, XMLParserDelegate, UIScrollViewDelegate 
 
         //self.createBoardsWith(sources: resources)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveDataNative(_:)), name: .didReceiveNativeCountryData, object: APIWorker.self)
-        
         NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveData(_:)), name: .didReceiveCountryData, object: APIWorker.self)
-        
-//        for family in UIFont.familyNames.sorted() {
-//            let names = UIFont.fontNames(forFamilyName: family)
-//            print("Family: \(family) Font names: \(names)")
-//        }
+         
     }
     
     func createBoardsWith(sources: [[String:String]]) {
@@ -93,26 +89,6 @@ class ViewController: UIViewController, XMLParserDelegate, UIScrollViewDelegate 
     
     
     // MARK: - notifications
-    @objc func onDidReceiveDataNative(_ notification: Notification)
-    {
-        if let data = notification.userInfo as? [String: JHUCountryInfo]
-        {
-            for (_, value) in data
-            {
-                DispatchQueue.main.async {
-
-                    let novelCardContentView : CardContentCountyInfo = CardContentCountyInfo()
-                    novelCardContentView.fillWithJHUItem(item: value)
-
-                    let novelCard : CardView = CardView(with: novelCardContentView)
-                    
-                    self.majorBoard.add(card: novelCard, at: 0)
-                    
-                    
-                }
-            }
-        }
-    }
     
     @objc func onDidReceiveData(_ notification: Notification)
     {

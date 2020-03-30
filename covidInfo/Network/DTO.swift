@@ -95,7 +95,7 @@ class JHUCountryInfo : CustomStringConvertible {
             let yesterdayCases = self.history.deathHistory[0].number  - self.history.deathHistory[1].number
             let todayCases = self.statisticsToday.todayDeaths
             
-            return todayCases - (yesterdayCases ?? 0)
+            return todayCases - yesterdayCases
         }
     }
     
