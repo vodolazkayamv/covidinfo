@@ -28,6 +28,21 @@ extension Date {
     }
 }
 
+extension String {
+    func localized() -> String {
+        
+        guard let preferredLangs = Locale.preferredLanguages.first,
+            let currentLang = preferredLangs.components(separatedBy: "-").first else { return "" }
+        
+        let lang = currentLang == "ar" ? currentLang : "en"
+        
+        guard let libBundle = Bundle(identifier: "geomatix.cz.covidInfo"),
+            let path = libBundle.path(forResource: lang, ofType: "lproj"),
+            let newBundle = Bundle(path: path) else { return "" }
+        return newBundle.localizedString(forKey: self, value: nil, table: nil)
+    }
+}
+
 extension NSAttributedString {
     internal convenience init?(html: String) {
         

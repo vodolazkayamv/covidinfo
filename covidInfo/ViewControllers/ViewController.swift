@@ -34,7 +34,7 @@ class ViewController: UIViewController, XMLParserDelegate, UIScrollViewDelegate 
 //        self.view.backgroundColor = .systemYellow
         print("Hello COVID-19 Info!")
         
-        self.view.backgroundColor = .systemGray6
+        //self.view.backgroundColor = .systemGray6
         self.panelViewContoller = PanelViewController(superview: self.view)
         self.view.addSubview(panelViewContoller.view)
         
@@ -45,11 +45,16 @@ class ViewController: UIViewController, XMLParserDelegate, UIScrollViewDelegate 
         self.panelViewContoller.add(board: majorBoard)
         self.majorBoard.addCopyrightLabelWith(text: "Data obtained from Coronavirus COVID-19 Global Cases by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University (JHU)")
 
-        self.createBoardsWith(sources: resources)
+        //self.createBoardsWith(sources: resources)
         
         NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveDataNative(_:)), name: .didReceiveNativeCountryData, object: APIWorker.self)
         
         NotificationCenter.default.addObserver(self, selector: #selector(onDidReceiveData(_:)), name: .didReceiveCountryData, object: APIWorker.self)
+        
+//        for family in UIFont.familyNames.sorted() {
+//            let names = UIFont.fontNames(forFamilyName: family)
+//            print("Family: \(family) Font names: \(names)")
+//        }
     }
     
     func createBoardsWith(sources: [[String:String]]) {

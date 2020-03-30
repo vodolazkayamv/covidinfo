@@ -12,6 +12,9 @@
 		9C34AD2A242FE8D7001457D2 /* PanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C34AD29242FE8D7001457D2 /* PanelViewController.swift */; };
 		9C34AD2C2430E923001457D2 /* DTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C34AD2B2430E922001457D2 /* DTO.swift */; };
 		9C34AD302430F7E2001457D2 /* CardContentCountyInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C34AD2F2430F7E2001457D2 /* CardContentCountyInfo.swift */; };
+		9C34AF3724320B24001457D2 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C34AF3624320B24001457D2 /* Logger.swift */; };
+		9C34AF3A24320DFC001457D2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9C34AF3C24320DFC001457D2 /* Localizable.strings */; };
+		9C34AF4624321D7B001457D2 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C34AF4524321D7B001457D2 /* ColorExtensions.swift */; };
 		AE1F00C1242E08BA0040627F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1F00C0242E08BA0040627F /* AppDelegate.swift */; };
 		AE1F00C3242E08BA0040627F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1F00C2242E08BA0040627F /* SceneDelegate.swift */; };
 		AE1F00C5242E08BA0040627F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1F00C4242E08BA0040627F /* ViewController.swift */; };
@@ -34,6 +37,12 @@
 		9C34AD29242FE8D7001457D2 /* PanelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelViewController.swift; sourceTree = "<group>"; };
 		9C34AD2B2430E922001457D2 /* DTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTO.swift; sourceTree = "<group>"; };
 		9C34AD2F2430F7E2001457D2 /* CardContentCountyInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardContentCountyInfo.swift; sourceTree = "<group>"; };
+		9C34AF3624320B24001457D2 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		9C34AF3B24320DFC001457D2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		9C34AF3D24320E0B001457D2 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
+		9C34AF3E24320E0B001457D2 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		9C34AF3F24320E0B001457D2 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		9C34AF4524321D7B001457D2 /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		AE1F00BD242E08BA0040627F /* covidInfo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = covidInfo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE1F00C0242E08BA0040627F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AE1F00C2242E08BA0040627F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -94,8 +103,19 @@
 			isa = PBXGroup;
 			children = (
 				AE1F00C9242E08BF0040627F /* Assets.xcassets */,
+				9C34AF3C24320DFC001457D2 /* Localizable.strings */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		9C34AF3524320B14001457D2 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				AE1F00FC242E3DB50040627F /* Extensions.swift */,
+				9C34AF4524321D7B001457D2 /* ColorExtensions.swift */,
+				9C34AF3624320B24001457D2 /* Logger.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		AE1F00B4242E08BA0040627F = {
@@ -122,7 +142,7 @@
 				AE1F010E242F74100040627F /* Main */,
 				AE1F010F242F74190040627F /* XIBs */,
 				AE1F0110242F74290040627F /* ViewControllers */,
-				AE1F00FC242E3DB50040627F /* Extensions.swift */,
+				9C34AF3524320B14001457D2 /* Helpers */,
 				AE1F010B242F72FF0040627F /* Network */,
 				AE1F0107242F63A20040627F /* StackUI */,
 			);
@@ -228,6 +248,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = AE1F00B4242E08BA0040627F;
 			productRefGroup = AE1F00BE242E08BA0040627F /* Products */;
@@ -245,6 +266,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE1F00CD242E08BF0040627F /* LaunchScreen.storyboard in Resources */,
+				9C34AF3A24320DFC001457D2 /* Localizable.strings in Resources */,
 				AE1F00CA242E08BF0040627F /* Assets.xcassets in Resources */,
 				AE1F00C8242E08BA0040627F /* Main.storyboard in Resources */,
 			);
@@ -262,9 +284,11 @@
 				9C15DAED242FDFFC00E0E646 /* BoardView.swift in Sources */,
 				AE1F0106242F5FC80040627F /* CardContentRSSItem.swift in Sources */,
 				AE5B864A242F90E400210A2C /* CardContentView.swift in Sources */,
+				9C34AF4624321D7B001457D2 /* ColorExtensions.swift in Sources */,
 				AE1F00FD242E3DB50040627F /* Extensions.swift in Sources */,
 				9C34AD28242FE63E001457D2 /* PanelView.swift in Sources */,
 				AE1F00C1242E08BA0040627F /* AppDelegate.swift in Sources */,
+				9C34AF3724320B24001457D2 /* Logger.swift in Sources */,
 				AE1F00D9242E25000040627F /* ScrollableStackView.swift in Sources */,
 				9C34AD302430F7E2001457D2 /* CardContentCountyInfo.swift in Sources */,
 				9C34AD2C2430E923001457D2 /* DTO.swift in Sources */,
@@ -279,10 +303,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		9C34AF3C24320DFC001457D2 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9C34AF3B24320DFC001457D2 /* en */,
+				9C34AF3F24320E0B001457D2 /* ru */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		AE1F00C6242E08BA0040627F /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				AE1F00C7242E08BA0040627F /* Base */,
+				9C34AF3D24320E0B001457D2 /* ru */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -291,6 +325,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				AE1F00CC242E08BF0040627F /* Base */,
+				9C34AF3E24320E0B001457D2 /* ru */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -302,6 +337,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -362,6 +398,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -424,7 +461,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = geomatix.covidInfo;
+				PRODUCT_BUNDLE_IDENTIFIER = geomatix.cz.covidInfo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -443,7 +480,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = geomatix.covidInfo;
+				PRODUCT_BUNDLE_IDENTIFIER = geomatix.cz.covidInfo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -1,0 +1,6 @@
+"cases" = "Cases";
+"deaths" = "Deaths";
+"critical" = "Critical";
+"recovered" = "Recovered";
+"active" = "Active";
+"today" = "Today";

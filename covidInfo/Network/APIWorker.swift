@@ -11,7 +11,7 @@ import Foundation
 class APIWorker {
     
     class func askCOVIDStatisticsAll() {
-        askAPIvia(urlString: "https://corona.lmao.ninja/countries?sort=todayCases",
+        askAPIvia(urlString: "https://corona.lmao.ninja/countries?sort=active",
                   completionHandler: { dataResponse in
                     do{
                         //                        let jsonResponse = try JSONSerialization.jsonObject(with: dataResponse, options: []) as AnyObject
@@ -33,7 +33,7 @@ class APIWorker {
                                         
                                         for country in countries {
                                             
-                                            if let location = resultArray.firstIndex(where: { $0.country == country.country.lowercased() }) {
+                                            if let location = resultArray.firstIndex(where: { $0.country.lowercased() == country.country.lowercased() }) {
                                                 // you know that location is not nil here
                                                 let result = resultArray[location]
                                                 
